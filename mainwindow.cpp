@@ -13,6 +13,7 @@ MainWindow::MainWindow( QWidget *parent )
     , ui( new Ui::MainWindow ), filename(), saved( true )
 {
     ui->setupUi( this );
+    setCentralWidget( ui->centralwidget );
 
 
     connect( ui->inputArea->verticalScrollBar(),
