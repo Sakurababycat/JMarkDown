@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>JMarkDown</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTextEdit" name="inputArea">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>10</y>
+      <width>391</width>
+      <height>541</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="display">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>10</y>
+      <width>401</width>
+      <height>541</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="file_menu">
+    <property name="title">
+     <string>文件</string>
+    </property>
+    <addaction name="new_action"/>
+    <addaction name="open_action"/>
+    <addaction name="save_action"/>
+    <addaction name="save_as_action"/>
+    <addaction name="separator"/>
+    <addaction name="exit_action"/>
+   </widget>
+   <widget class="QMenu" name="help_menu">
+    <property name="title">
+     <string>帮助</string>
+    </property>
+    <addaction name="about_action"/>
+   </widget>
+   <addaction name="file_menu"/>
+   <addaction name="help_menu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="open_action">
+   <property name="text">
+    <string>打开</string>
+   </property>
+  </action>
+  <action name="save_action">
+   <property name="text">
+    <string>保存</string>
+   </property>
+  </action>
+  <action name="about_action">
+   <property name="text">
+    <string>关于</string>
+   </property>
+  </action>
+  <action name="exit_action">
+   <property name="text">
+    <string>退出</string>
+   </property>
+  </action>
+  <action name="new_action">
+   <property name="text">
+    <string>新建</string>
+   </property>
+  </action>
+  <action name="save_as_action">
+   <property name="text">
+    <string>另存为</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
