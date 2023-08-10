@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "QScrollBar"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -31,7 +32,7 @@ private slots:
     void textEdit2display();
 
 
-    void sync2zone();
+    void sync2zone( QScrollBar *, QScrollBar * );
 
 
     bool checkFileSave();

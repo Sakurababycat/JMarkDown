@@ -20,8 +20,16 @@ MainWindow::MainWindow( QWidget *parent )
 
     connect( ui->inputArea->verticalScrollBar(),
          &QScrollBar::valueChanged, this, [this]() {
-        this->sync2zone();
+        this->sync2zone( ui->inputArea->verticalScrollBar(), ui->display->verticalScrollBar() );
     } );
+
+
+    connect( ui->display->verticalScrollBar(),
+         &QScrollBar::valueChanged, this, [this]() {
+        this->sync2zone( ui->display->verticalScrollBar(), ui->inputArea->verticalScrollBar() );
+    } );
+
+
     connect( ui->inputArea, &QTextEdit::textChanged, this,
          [this]() {
         saved = false;
@@ -191,20 +199,20 @@ bool MainWindow::checkFileSave()
 }
 
 
-void MainWindow::sync2zone()
+void MainWindow::sync2zone( QScrollBar *lh, QScrollBar *rh )
 {
-    auto		*inputScroll	= ui->inputArea->verticalScrollBar();
-    auto		*displayScroll	= ui->display->verticalScrollBar();
-    const auto &	pos		= inputScroll->value(),
-    &inMin				= inputScroll->minimum(),
-    &inMax				= inputScroll->maximum();
-    const auto & dispMin		= displayScroll->minimum(),
-             dispMax		= displayScroll->maximum();
-    auto dispPos			=
+    static bool flag = true;
+    if ( !flag )
+        return;
+    flag = false;
+    const auto &	pos = lh->value(), &inMin = lh->minimum(), &inMax = lh->maximum();
+    const auto &	dispMin = rh->minimum(), dispMax = rh->maximum();
+    auto		dispPos =
         (inMax - inMin) ?
         pos * (dispMax - dispMin) / (inMax - inMin) : 0;
-
-    displayScroll->setValue( dispPos );
+    if ( dispPos != rh->value() )
+        rh->setValue( dispPos );
+    flag = true;
 }
 
 
@@ -216,7 +224,7 @@ void MainWindow::textEdit2display()
         const auto &	content		= inputArea->toPlainText();
         /*display->setPlainText( content.sliced( content.length() / 2 ) ); */
         display->setHtml( md2html( content ) );
-        sync2zone();
+        sync2zone( inputArea->verticalScrollBar(), display->verticalScrollBar() );
     } catch ( const QException &e ) {
         qDebug() << e.what() << '\n';
     }
