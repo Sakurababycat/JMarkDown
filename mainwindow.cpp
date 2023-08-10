@@ -7,6 +7,8 @@
 #include "QCloseEvent"
 #include "QMessageBox"
 #include "QAbstractButton"
+#include "utils.h"
+#include "QShortcut"
 
 MainWindow::MainWindow( QWidget *parent )
     : QMainWindow( parent )
@@ -24,6 +26,14 @@ MainWindow::MainWindow( QWidget *parent )
          [this]() {
         saved = false;
         this->textEdit2display();
+    } );
+    connect( new QShortcut( QKeySequence( Qt::CTRL | Qt::Key_S ), this ),
+         &QShortcut::activated, this, [this]() {
+        this->save();
+    } );
+    connect( new QShortcut( QKeySequence( Qt::CTRL | Qt::Key_N ), this ),
+         &QShortcut::activated, this, [this]() {
+        this->on_new_action_triggered();
     } );
 }
 
@@ -111,7 +121,7 @@ bool MainWindow::selectNewFile2Save()
     QFileDialog fileDialog;
     fileDialog.setWindowTitle( "保存文件" );
     fileDialog.setNameFilter( "MarkDown文件 (*.md);;文本文件 (*.txt)" );
-    fileDialog.setFileMode( QFileDialog::AnyFile );
+    fileDialog.setAcceptMode( QFileDialog::AcceptSave );
     if ( !fileDialog.exec() )
         return(false);
     filename = fileDialog.selectedFiles().at( 0 );
@@ -142,7 +152,6 @@ void MainWindow::write2file()
 
 bool MainWindow::save()
 {
-    qDebug() << filename << saved;
     if ( filename.isEmpty() )
     {
         if ( !selectNewFile2Save() )
@@ -205,7 +214,9 @@ void MainWindow::textEdit2display()
         auto		*inputArea	= ui->inputArea;
         auto		*display	= ui->display;
         const auto &	content		= inputArea->toPlainText();
-        display->setPlainText( content.sliced( content.length() / 2 ) );
+        /*display->setPlainText( content.sliced( content.length() / 2 ) ); */
+        display->setHtml( md2html( content ) );
+        sync2zone();
     } catch ( const QException &e ) {
         qDebug() << e.what() << '\n';
     }

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1024</width>
+    <height>768</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -49,6 +49,9 @@
       <property name="cursor" stdset="0">
        <cursorShape>IBeamCursor</cursorShape>
       </property>
+      <property name="openExternalLinks">
+       <bool>true</bool>
+      </property>
      </widget>
     </item>
    </layout>
@@ -58,7 +61,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1024</width>
      <height>19</height>
     </rect>
    </property>
