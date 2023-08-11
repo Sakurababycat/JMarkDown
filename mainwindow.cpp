@@ -43,6 +43,10 @@ MainWindow::MainWindow( QWidget *parent )
          &QShortcut::activated, this, [this]() {
         this->on_new_action_triggered();
     } );
+    connect( new QShortcut( QKeySequence( Qt::CTRL | Qt::Key_O ), this ),
+         &QShortcut::activated, this, [this]() {
+        this->on_open_action_triggered();
+    } );
 }
 
 
