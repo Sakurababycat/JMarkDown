@@ -185,9 +185,9 @@ bool MainWindow::checkFileSave()
         qbox.setWindowTitle( QString( "未保存的文件" ) );
         qbox.setText( QString( "当前工作区有未保存的修改，是否保存到文件%1？" ).arg( filename ) );
         qbox.setStandardButtons( QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel );
-        qbox.button( QMessageBox::Yes )->setText( "是" );
-        qbox.button( QMessageBox::No )->setText( "否" );
-        qbox.button( QMessageBox::Cancel )->setText( "取消" );
+        qbox.button( QMessageBox::Yes )->setText( "是(&Y)" );
+        qbox.button( QMessageBox::No )->setText( "否(&N)" );
+        qbox.button( QMessageBox::Cancel )->setText( "取消(&C)" );
 
         switch ( qbox.exec() )
         {
