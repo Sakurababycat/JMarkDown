@@ -67,7 +67,7 @@
    </property>
    <widget class="QMenu" name="file_menu">
     <property name="title">
-     <string>文件</string>
+     <string>文件(&amp;F)</string>
     </property>
     <addaction name="new_action"/>
     <addaction name="open_action"/>
@@ -78,7 +78,7 @@
    </widget>
    <widget class="QMenu" name="help_menu">
     <property name="title">
-     <string>帮助</string>
+     <string>帮助(&amp;H)</string>
     </property>
     <addaction name="about_action"/>
    </widget>
@@ -88,32 +88,68 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="open_action">
    <property name="text">
-    <string>打开</string>
+    <string>打开(&amp;O)</string>
+   </property>
+   <property name="statusTip">
+    <string>打开文件</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
    </property>
   </action>
   <action name="save_action">
    <property name="text">
-    <string>保存</string>
+    <string>保存(&amp;S)</string>
+   </property>
+   <property name="statusTip">
+    <string>保存文件</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
   <action name="about_action">
    <property name="text">
-    <string>关于</string>
+    <string>关于(&amp;H)</string>
+   </property>
+   <property name="statusTip">
+    <string>关于JMarkDown</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
    </property>
   </action>
   <action name="exit_action">
    <property name="text">
-    <string>退出</string>
+    <string>退出(&amp;X)</string>
+   </property>
+   <property name="statusTip">
+    <string>退出JMarkDown</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
    </property>
   </action>
   <action name="new_action">
    <property name="text">
-    <string>新建</string>
+    <string>新建(&amp;N)</string>
+   </property>
+   <property name="statusTip">
+    <string>新建文件</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
    </property>
   </action>
   <action name="save_as_action">
    <property name="text">
-    <string>另存为</string>
+    <string>另存为(&amp;A)</string>
+   </property>
+   <property name="statusTip">
+    <string>文件另存为</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
    </property>
   </action>
  </widget>

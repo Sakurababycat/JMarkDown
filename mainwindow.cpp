@@ -19,34 +19,36 @@ MainWindow::MainWindow( QWidget *parent )
 
 
     connect( ui->inputArea->verticalScrollBar(),
-         &QScrollBar::valueChanged, this, [this]() {
+             &QScrollBar::valueChanged, this, [this]() {
         this->sync2zone( ui->inputArea->verticalScrollBar(), ui->display->verticalScrollBar() );
     } );
 
 
     connect( ui->display->verticalScrollBar(),
-         &QScrollBar::valueChanged, this, [this]() {
+             &QScrollBar::valueChanged, this, [this]() {
         this->sync2zone( ui->display->verticalScrollBar(), ui->inputArea->verticalScrollBar() );
     } );
 
 
     connect( ui->inputArea, &QTextEdit::textChanged, this,
-         [this]() {
+             [this]() {
         saved = false;
         this->textEdit2display();
     } );
-    connect( new QShortcut( QKeySequence( Qt::CTRL | Qt::Key_S ), this ),
-         &QShortcut::activated, this, [this]() {
-        this->save();
-    } );
-    connect( new QShortcut( QKeySequence( Qt::CTRL | Qt::Key_N ), this ),
-         &QShortcut::activated, this, [this]() {
-        this->on_new_action_triggered();
-    } );
-    connect( new QShortcut( QKeySequence( Qt::CTRL | Qt::Key_O ), this ),
-         &QShortcut::activated, this, [this]() {
-        this->on_open_action_triggered();
-    } );
+
+//    connect( new QShortcut( QKeySequence( Qt::CTRL | Qt::Key_S ), this ),
+//             &QShortcut::activated, this, [this]() {
+//        this->save();
+//    } );
+//    connect( new QShortcut( QKeySequence( Qt::CTRL | Qt::Key_N ), this ),
+//             &QShortcut::activated, this, [this]() {
+//        this->on_new_action_triggered();
+//    } );
+//    connect( new QShortcut( QKeySequence( Qt::CTRL | Qt::Key_O ), this ),
+//             &QShortcut::activated, this, [this]() {
+//        this->on_open_action_triggered();
+//    } );
+
 }
 
 
@@ -104,8 +106,8 @@ void MainWindow::on_open_action_triggered()
             QFile file( filename );
             if ( file.open( QIODevice::ReadOnly | QIODevice::Text ) )
             {
-                QTextStream	in( &file );
-                QString		fileContent = in.readAll();
+                QTextStream in( &file );
+                QString fileContent = in.readAll();
                 file.close();
 
                 inputArea->clear();
@@ -144,12 +146,12 @@ bool MainWindow::selectNewFile2Save()
 void MainWindow::write2file()
 {
     try {
-        auto	*inputArea = ui->inputArea;
-        QFile	file( filename );
+        auto    *inputArea = ui->inputArea;
+        QFile file( filename );
         if ( file.open( QIODevice::WriteOnly | QIODevice::Text ) )
         {
-            auto		content = inputArea->toPlainText();
-            QTextStream	fos( &file );
+            auto content = inputArea->toPlainText();
+            QTextStream fos( &file );
             fos << content;
             file.close();
             saved = true;
@@ -209,9 +211,9 @@ void MainWindow::sync2zone( QScrollBar *lh, QScrollBar *rh )
     if ( !flag )
         return;
     flag = false;
-    const auto &	pos = lh->value(), &inMin = lh->minimum(), &inMax = lh->maximum();
-    const auto &	dispMin = rh->minimum(), dispMax = rh->maximum();
-    auto		dispPos =
+    const auto &        pos = lh->value(), &inMin = lh->minimum(), &inMax = lh->maximum();
+    const auto &        dispMin = rh->minimum(), dispMax = rh->maximum();
+    auto dispPos =
         (inMax - inMin) ?
         pos * (dispMax - dispMin) / (inMax - inMin) : 0;
     if ( dispPos != rh->value() )
@@ -223,9 +225,9 @@ void MainWindow::sync2zone( QScrollBar *lh, QScrollBar *rh )
 void MainWindow::textEdit2display()
 {
     try{
-        auto		*inputArea	= ui->inputArea;
-        auto		*display	= ui->display;
-        const auto &	content		= inputArea->toPlainText();
+        auto            *inputArea      = ui->inputArea;
+        auto            *display        = ui->display;
+        const auto &    content         = inputArea->toPlainText();
         /*display->setPlainText( content.sliced( content.length() / 2 ) ); */
         display->setHtml( md2html( content ) );
         sync2zone( inputArea->verticalScrollBar(), display->verticalScrollBar() );
